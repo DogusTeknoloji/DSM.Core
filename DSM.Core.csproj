@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>1.0.7257.1</AssemblyVersion>
+    <FileVersion>1.0.7257.1</FileVersion>
+    <PackageId>DSM.Core</PackageId>
+    <Version>1.0.7257.0</Version>
+    <Authors>Dogus Technology DevOps Team</Authors>
+    <Company>Dogus Technology</Company>
+    <Product>DSM Core</Product>
+    <Description>DSM Libraries - Core Module</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <RepositoryType>Library</RepositoryType>
+    <PackageProjectUrl>https://github.com/DogusTeknoloji/DSM-UI-Solution</PackageProjectUrl>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageTags>Open APMM, Service Monitoring , Performance Monitoring</PackageTags>
+    <RepositoryUrl>https://github.com/DogusTeknoloji/dsm-core</RepositoryUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/DogusTeknoloji/DSM-UI-Solution/master/public/favicon.jpg</PackageIconUrl>
+    <PackageReleaseNotes>+ DSM.CoreOps.AppSettingsManager module added</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\Management\" />
+    <Folder Include="Interfaces\Networking\" />
+    <Folder Include="Interfaces\AppServices\" />
+    <Folder Include="Interfaces\PlatformServices\" />
+    <Folder Include="Models\Management\" />
+    <Folder Include="Models\Networking\" />
+    <Folder Include="Models\PlatformServices\" />
+    <Folder Include="Ops\Networking\" />
+    <Folder Include="Ops\PlatformServices\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FastMember" Version="1.5.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.7.0" />
+    <PackageReference Include="System.DirectoryServices" Version="4.6.0" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
