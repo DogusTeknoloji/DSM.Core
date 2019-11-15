@@ -13,18 +13,19 @@ namespace DSM.Core.Ops
 {
     public static class WebOperations
     {
-        private static string serverUrl = "http://10.236.51.40:90";
+
+#if DEBUG
+        private static string serverUrl = $"http://{Extensions.GetLocalIPAddress()}:90";
+#else 
+        private static string serverUrl = AppSettingsManager.GetConfiguration()["Host:Url"];
+#endif
 
         private static readonly LogManager logManager = LogManager.GetManager("WebOperations");
         public static string AuthenticateAgent(string AgentName, string ServerName)
         {
             try
             {
-#if DEBUG
-                WebRequest request = WebRequest.CreateHttp($"http://{Extensions.GetLocalIPAddress()}:90/Auth/Login/");
-#else
                 WebRequest request = WebRequest.CreateHttp($"{serverUrl}/Auth/Login/");
-#endif
                 request.Method = "POST";
                 request.ContentType = "application/x-www-form-urlencoded";
 
@@ -49,15 +50,16 @@ namespace DSM.Core.Ops
             }
         }
 
-        public static T WebGet<T>(string method, string apiKey, params object[] parameters)
+        public static T WebGet<T>(string method, params object[] parameters)
         {
             try
             {
-#if DEBUG
-                WebRequest request = WebRequest.CreateHttp($"http://{Extensions.GetLocalIPAddress()}:90/{method}/{string.Join("/", parameters)}?NGAuthVKey={apiKey}");
-#else
-                WebRequest request = WebRequest.CreateHttp($"{serverUrl}/{method}/{string.Join("/", parameters)}?NGAuthVKey={apiKey}");
-#endif
+                string requestParameters = string.Join("/", parameters);
+                string requestString = string.Join("/", serverUrl, method);
+                if (requestParameters.Length > 0) requestString = string.Join("/", requestString, requestParameters);
+
+
+                WebRequest request = WebRequest.CreateHttp(requestString);
                 request.Method = "GET";
                 request.ContentType = "application/json";
 
@@ -70,14 +72,39 @@ namespace DSM.Core.Ops
             }
             catch (WebException ex)
             {
-                logManager.Write(ex.Message);
-                logManager.Write(ex.StackTrace);
-                logManager.Write(ex.HResult.ToString());
-                logManager.Write(ex.Source);
-                logManager.Write(ex.Data.ToString());
-                logManager.Write(ex.Response.ResponseUri.AbsoluteUri);
-                XConsole.WriteLine(ex.ToString(), ConsoleTheming.ConsoleColorSetRed.Instance);
-                XConsole.WriteLine(ex.Response.ResponseUri.AbsoluteUri, ConsoleTheming.ConsoleColorSetRed.Instance);
+                ExceptionHandler.WebException(ex);
+                return default;
+            }
+            catch (JsonException ex)
+            {
+                ExceptionHandler.JsonException(ex);
+                return default;
+            }
+        }
+
+        public static T WebGet<T>(string method, string apiKey, params object[] parameters)
+        {
+            try
+            {
+                WebRequest request = WebRequest.CreateHttp($"{serverUrl}/{method}/{string.Join("/", parameters)}?NGAuthVKey={apiKey}");
+                request.Method = "GET";
+                request.ContentType = "application/json";
+
+                WebResponse response = request.GetResponse();
+
+                StreamReader responseStream = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                string incMsg = responseStream.ReadToEnd();
+                T json = JsonConvert.DeserializeObject<T>(incMsg);
+                return json;
+            }
+            catch (WebException ex)
+            {
+                ExceptionHandler.WebException(ex);
+                return default;
+            }
+            catch (JsonException ex)
+            {
+                ExceptionHandler.JsonException(ex);
                 return default;
             }
         }
@@ -93,11 +120,8 @@ namespace DSM.Core.Ops
                 }
 
                 silencioFlag = true;
-#if DEBUG
-                WebRequest request = WebRequest.CreateHttp($"http://{Extensions.GetLocalIPAddress()}:90/{method}/?NGAuthVKey={apiKey}");
-#else
+
                 WebRequest request = WebRequest.CreateHttp($"{serverUrl}/{method}/?NGAuthVKey={apiKey}");
-#endif
                 request.Method = "POST";
                 request.ContentType = "application/json";
                 string requestBody = JsonConvert.SerializeObject(bodyItem);
@@ -117,12 +141,7 @@ namespace DSM.Core.Ops
             }
             catch (Exception ex)
             {
-                logManager.Write(ex.Message);
-                logManager.Write(ex.StackTrace);
-                logManager.Write(ex.HResult.ToString());
-                logManager.Write(ex.Source);
-                logManager.Write(ex.Data.ToString());
-                XConsole.WriteLine(ex.ToString(), ConsoleTheming.ConsoleColorSetRed.Instance);
+                ExceptionHandler.Exception(ex);
                 return default;
             }
         }

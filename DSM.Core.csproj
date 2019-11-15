@@ -2,25 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.0.7257.1</AssemblyVersion>
-    <FileVersion>1.0.7257.1</FileVersion>
+    <AssemblyVersion>1.0.7258.11</AssemblyVersion>
+    <FileVersion>1.0.7258.11</FileVersion>
     <PackageId>DSM.Core</PackageId>
-    <Version>1.0.7257.0</Version>
+    <Version>1.0.7258.11</Version>
     <Authors>Dogus Technology DevOps Team</Authors>
     <Company>Dogus Technology</Company>
     <Product>DSM Core</Product>
     <Description>DSM Libraries - Core Module</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageLicenseExpression></PackageLicenseExpression>
     <RepositoryType>Library</RepositoryType>
-    <PackageProjectUrl>https://github.com/DogusTeknoloji/DSM-UI-Solution</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/DogusTeknoloji/dsm.core</PackageProjectUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageTags>Open APMM, Service Monitoring , Performance Monitoring</PackageTags>
-    <RepositoryUrl>https://github.com/DogusTeknoloji/dsm-core</RepositoryUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/DogusTeknoloji/DSM-UI-Solution/master/public/favicon.jpg</PackageIconUrl>
-    <PackageReleaseNotes>+ DSM.CoreOps.AppSettingsManager module added</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/DogusTeknoloji/dsm.core</RepositoryUrl>
+    <PackageIcon>dsm-logo.png</PackageIcon>
+    <PackageReleaseNotes>Repository Url updated. </PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,6 +33,7 @@
     <Folder Include="Models\PlatformServices\" />
     <Folder Include="Ops\Networking\" />
     <Folder Include="Ops\PlatformServices\" />
+    <None Include=".\dsm-logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,7 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="LICENSE.txt">
+    <None Include="LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
