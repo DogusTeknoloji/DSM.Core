@@ -1,0 +1,28 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+  
+variables:
+  buildConfiguration: 'Release'
+  releaseOS: 'win-x64'
+
+steps:
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    arguments: '-c $(buildConfiguration) -o output -r $(releaseOS)'
+- task: CopyFiles@1
+  inputs:
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
