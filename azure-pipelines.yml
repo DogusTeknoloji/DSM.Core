@@ -4,23 +4,34 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
   
-variables:
-  buildConfiguration: 'Release'
-  releaseOS: 'win-x64'
-
+name: $(Year:yy).$(DayOfYear).$(Rev:rr)
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- script: dotnet build --configuration $(build-configuration)
+  displayName: 'dotnet build $(build-configuration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    configuration: '$(build-configuration)'
+    nobuild: true
+    versioningScheme: 'byBuildNumber'
+    verbosityPack: 'Diagnostic'
+
+- script: dotnet nuget push $(Build.ArtifactStagingDirectory)/*.nupkg -k $(nuget-apikey) -s $(nuget-url)
+  displayName: 'dotnet nuget push $(Build.ArtifactStagingDirectory)/*.nupkg'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     publishWebProjects: false
-    arguments: '-c $(buildConfiguration) -o output -r $(releaseOS)'
+    arguments: '-c $(build-configuration) -o $(build-dir) -r $(windows-os)'
 - task: CopyFiles@1
   inputs:
-    Contents: '**'
-    TargetFolder: '$(build.artifactstagingdirectory)'
+    Contents: '**/$(build-dir)/**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    CleanTargetFolder: true
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
