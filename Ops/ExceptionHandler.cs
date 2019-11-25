@@ -22,9 +22,9 @@ namespace DSM.Core.Ops
         public static void WebException(WebException ex)
         {
             WriteGenericLog(ex);
-            logManager.Write(ex.Response.ResponseUri.AbsoluteUri);
+            logManager.Write(ex.Response?.ResponseUri.AbsoluteUri);
 
-            XConsole.WriteLine(ex.Response.ResponseUri.AbsoluteUri, colorSet);
+            XConsole.WriteLine(ex.Response?.ResponseUri.AbsoluteUri, colorSet);
         }
 
         public static void JsonException(JsonException ex)
