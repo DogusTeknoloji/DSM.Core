@@ -15,7 +15,8 @@ namespace DSM.Core.Ops
     {
 
 #if DEBUG
-        private static string serverUrl = $"http://{Extensions.GetLocalIPAddress()}:90";
+        //private static string serverUrl = $"http://{Extensions.GetLocalIPAddress()}:90";
+        private static string serverUrl = AppSettingsManager.GetConfiguration()["Host:Url"];
 #else 
         private static string serverUrl = AppSettingsManager.GetConfiguration()["Host:Url"];
 #endif

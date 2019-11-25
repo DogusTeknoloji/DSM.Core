@@ -11,7 +11,8 @@ namespace DSM.Core.Ops
 
         public static IConfiguration GetConfiguration(string filename = "appsettings.json")
         {
-            if (string.IsNullOrWhiteSpace(filename) || !File.Exists(filename))
+            string result = Path.Combine(FileOperations.AssemblyDirectory, filename);
+            if (string.IsNullOrWhiteSpace(filename) || !File.Exists(result))
             {
                 return null;
             }

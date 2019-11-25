@@ -1,26 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace DSM.Core.Ops
 {
     public class LogManager : IDisposable
     {
-        private static LogManager _logManager;
+        private static List<LogManager> _instances = new List<LogManager>();
         public static LogManager GetManager(string name)
         {
-            if (_logManager == null)
+            if (_instances.Any(x => x.Name == name))
             {
-                _logManager = new LogManager(name);
+                return _instances.First(x => x.Name == name);
             }
-            return _logManager;
-        }
 
+            return new LogManager(name);
+        }
+        public string Name { get; set; }
         private const string filePath = @"C:\DSMService_LOGS\";
-        private const string fileName = "DEBUG.txt";
+        private const string fileName = "LOG.txt";
         private static StreamWriter swriter;
 
         private LogManager(string name)
         {
+            this.Name = name;
+            _instances.Add(this);
+
             string fullPath = string.Concat(filePath, name, @"\", DateTime.Now.ToString("yyMMdd"), "_", fileName);
 
             bool isPathRepaired = fullPath.AutoPathRepair();
@@ -40,7 +46,15 @@ namespace DSM.Core.Ops
 
         public void Dispose()
         {
-            swriter.Dispose();
+            Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                swriter.Dispose();
+            }
         }
     }
 }
