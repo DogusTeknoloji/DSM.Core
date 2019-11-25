@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.0.7258.11</AssemblyVersion>
-    <FileVersion>1.0.7258.11</FileVersion>
+    <AssemblyVersion>1.0.7268.5</AssemblyVersion>
+    <FileVersion>1.0.7268.5</FileVersion>
     <PackageId>DSM.Core</PackageId>
     <Version>1.0.7258.11</Version>
     <Authors>Dogus Technology DevOps Team</Authors>
