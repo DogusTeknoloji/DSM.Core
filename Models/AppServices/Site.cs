@@ -79,7 +79,7 @@ namespace DSM.Core.Models
         [Column("TraceFailedRequestsLoggingDirectory", Order = 17)]
         public string TraceFailedRequestsLoggingDirectory { get => _traceFailedRequestsLoggingDirectory; set => _traceFailedRequestsLoggingDirectory = value.Limit(512); } //-> 150 byte  + 4 byte address
 
-        [Column("LastUpdated", Order = 18]
+        [Column("LastUpdated", Order = 18)]
         public DateTime LastUpdated { get; set; } = new DateTime(1900, 01, 01);
 
         [Column("DateDeleted", Order = 19)]
