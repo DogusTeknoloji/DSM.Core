@@ -72,10 +72,10 @@ namespace DSM.Core.Ops
                                                     _authToken, siteId);
         }
 
-        public static IEnumerable<SiteTransactionFilterExcludedItem> GetSiteTransactionFilters()
+        public static IEnumerable<SiteLogFilter> GetSiteTransactionFilters()
         {
             return WebOperations
-                .WebGet<IEnumerable<SiteTransactionFilterExcludedItem>>(WebOperations.WebMethod.GET_TRANSACTION_FILTERS,
+                .WebGet<IEnumerable<SiteLogFilter>>(WebOperations.WebMethod.GET_TRANSACTION_FILTERS,
                                                                         _authToken);
         }
 
