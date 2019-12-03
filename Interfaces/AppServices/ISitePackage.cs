@@ -4,6 +4,6 @@
     {
         long SiteId { get; set; }
         string Name { get; set; }
-        string NewVersion { get; set; }
+        string Version { get; set; }
     }
 }

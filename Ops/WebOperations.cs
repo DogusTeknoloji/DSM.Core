@@ -293,5 +293,9 @@ namespace DSM.Core.Ops
 
             public const string DELETE_AUTH_DESTROY_API = "/";
         }
+        public struct UIWebMethod
+        {
+
+        }
     }
 }
