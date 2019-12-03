@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DSM.Core.Models;
+using System;
 
 namespace DSM.Core.Interfaces.AppServices
 {
@@ -17,6 +18,6 @@ namespace DSM.Core.Interfaces.AppServices
         string UserName { get; set; }
         bool SendAlertMailWhenUnavailable { get; set; }
         long ResponseTime { get; set; }
-        ISite Site { get; set; }
+        Site Site { get; set; }
     }
 }

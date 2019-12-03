@@ -2,7 +2,7 @@
 {
     public interface ISiteWebConfiguration
     {
-        long Id { get; set; }
+        long SiteId { get; set; }
         string ContentRaw { get; set; }
     }
 }

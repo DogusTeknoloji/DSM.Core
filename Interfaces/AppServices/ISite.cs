@@ -6,8 +6,8 @@ namespace DSM.Core.Interfaces.AppServices
 {
     public interface ISite : ISiteBase, ISiteTracker, ICloneable
     {
-        long Id { get; set; }
-        long IISSiteId { get; set; }
+        long SiteId { get; set; }
+        long? IISSiteId { get; set; }
         string MachineName { get; set; }
         long MaxBandwitdh { get; set; }
         long MaxConnections { get; set; }
