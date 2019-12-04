@@ -12,7 +12,7 @@ namespace DSM.Core.Models
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("Id", Order = 1)]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Column("SiteId", Order = 2)]
         public long SiteId { get; set; }
