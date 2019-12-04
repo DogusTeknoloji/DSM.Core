@@ -45,7 +45,7 @@ namespace DSM.Core.Models
         public DateTime LastCheckDate { get; set; } = new DateTime(1900, 01, 01);
         [Column("DeleteDate", Order = 13)]
         public DateTime DeleteDate { get; set; } = new DateTime(1900, 01, 01);
-        [Column("DeleteStatues", Order = 14)]
+        [Column("DeleteStatus", Order = 14)]
         public bool DeleteStatus { get; set; } = false;
         [Column("SendAlertMailWhenUnavailable", Order = 15)]
         public bool SendAlertMailWhenUnavailable { get; set; } = true;
