@@ -108,7 +108,7 @@ namespace DSM.Core.Models
 
         //-> Summary: 1190 byte => 1,162 KB       
 
-        [JsonIgnore, ExcludeFromDataModel]
+        [JsonIgnore, ExcludeFromDataModel, NotMapped]
         public object RawBindings { get; set; }
 
         [JsonIgnore, ExcludeFromDataModel]
