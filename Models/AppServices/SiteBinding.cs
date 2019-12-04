@@ -33,7 +33,7 @@ namespace DSM.Core.Models
         [Column("IpAddress", Order = 5)]
         public string IpAddress { get => _ipAddress; set => _ipAddress = value.Limit(64); }
 
-        [Column("IpAddressFamiliy", Order = 6)]
+        [Column("IpAdressFamily", Order = 6)]
         public string IpAddressFamily { get => _ipAddressFamily; set => _ipAddressFamily = value.Limit(15); }
 
         [Column("Port", Order = 7)]
