@@ -16,6 +16,7 @@
 
 ###### Code Quality Stats
 [![CodeFactor](https://www.codefactor.io/repository/github/dogusteknoloji/dsm.core/badge)](https://www.codefactor.io/repository/github/dogusteknoloji/dsm.core)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ca6d1e49ad4b440ab2625be2aa3007f7)](https://www.codacy.com/manual/onurakkaya/DSM.Core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DogusTeknoloji/DSM.Core&amp;utm_campaign=Badge_Grade)
 
 **DSM** is an middleware management and reporting tool designed to be strong and simple. It is build with C#. It can be used to collect IIS Site info,bindings,logs,site backends and more...
 
