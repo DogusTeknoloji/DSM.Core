@@ -16,7 +16,6 @@ namespace DSM.Core.Ops
 
         private static readonly Dictionary<string, string> _defaultTitle = new Dictionary<string, string>();
 
-        private static readonly string _consolePrefix = string.Empty;
         private static string GetCallerClassName(int stPoint = 2)
         {
             StackFrame frame = new StackFrame(stPoint);
@@ -107,17 +106,17 @@ namespace DSM.Core.Ops
 
         public static void Progress(string stepDescription, int progress, int total)
         {
-            int totalChunks = 30;
+            const int TOTALCHUNKS = 30;
 
             //draw empty progress bar
             Console.CursorLeft = 0;
             Console.Write("["); //start
-            Console.CursorLeft = totalChunks + 1;
+            Console.CursorLeft = TOTALCHUNKS + 1;
             Console.Write("]"); //end
             Console.CursorLeft = 1;
 
             double pctComplete = Convert.ToDouble(progress) / total;
-            int numChunksComplete = Convert.ToInt16(totalChunks * pctComplete);
+            int numChunksComplete = Convert.ToInt16(TOTALCHUNKS * pctComplete);
 
             //draw completed chunks
             Console.BackgroundColor = ConsoleColor.Green;
@@ -125,10 +124,10 @@ namespace DSM.Core.Ops
 
             //draw incomplete chunks
             Console.BackgroundColor = ConsoleColor.Gray;
-            Console.Write("".PadRight(totalChunks - numChunksComplete));
+            Console.Write("".PadRight(TOTALCHUNKS - numChunksComplete));
 
             //draw totals
-            Console.CursorLeft = totalChunks + 5;
+            Console.CursorLeft = TOTALCHUNKS + 5;
             Console.BackgroundColor = _bg;
 
             string output = progress.ToString() + " of " + total.ToString();

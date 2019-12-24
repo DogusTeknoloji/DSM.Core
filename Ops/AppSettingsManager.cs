@@ -5,11 +5,17 @@ using System.IO;
 
 namespace DSM.Core.Ops
 {
-    public class AppSettingsManager
+    public static class AppSettingsManager
     {
-        private static Dictionary<string, IConfiguration> settings = new Dictionary<string, IConfiguration>();
+        private static readonly Dictionary<string, IConfiguration> _settings = new Dictionary<string, IConfiguration>();
 
-        public static IConfiguration GetConfiguration(string filename = "appsettings.json")
+        public static IConfiguration GetConfiguration()
+        {
+            IConfiguration result = GetConfiguration("appsettings.json");
+            return result;
+        }
+
+        public static IConfiguration GetConfiguration(string filename)
         {
             string result = Path.Combine(FileOperations.AssemblyDirectory, filename);
             if (string.IsNullOrWhiteSpace(filename) || !File.Exists(result))
@@ -17,14 +23,14 @@ namespace DSM.Core.Ops
                 return null;
             }
 
-            if (!settings.ContainsKey(filename))
+            if (!_settings.ContainsKey(filename))
             {
-                settings.Add(filename, new ConfigurationBuilder()
+                _settings.Add(filename, new ConfigurationBuilder()
                      .AddJsonFile(filename)
                      .Build());
             }
 
-            return settings[filename];
+            return _settings[filename];
         }
     }
 }

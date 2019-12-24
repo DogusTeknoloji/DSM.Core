@@ -13,13 +13,13 @@ namespace DSM.Core.Models.Management
 
         public struct Names
         {
-            public const short MonitorService = 1;
-            public const short EndpointTracker = 2;
-            public const short CSTTracker = 3;
-            public const short NancyGateway = 4;
-            public const short PostOffice = 5;
-            public const short WebConfBackup = 6;
-            public const short SiteTransactions = 7;
+            public static short MonitorService => 1;
+            public static short EndpointTracker => 2;
+            public static short CSTTracker => 3;
+            public static short NancyGateway => 4;
+            public static short PostOffice => 5;
+            public static short WebConfBackup => 6;
+            public static short SiteTransactions => 7;
         }
     }
 }

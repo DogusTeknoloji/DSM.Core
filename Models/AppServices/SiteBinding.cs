@@ -28,7 +28,7 @@ namespace DSM.Core.Models
         public virtual Site Site { get; set; }
 
         [Column("IsSSLBound", Order = 4)]
-        public bool IsSSLBound { get; set; } = false; // SQL side default : false
+        public bool IsSSLBound { get; set; }
 
         [Column("IpAddress", Order = 5)]
         public string IpAddress { get => _ipAddress; set => _ipAddress = value.Limit(64); }

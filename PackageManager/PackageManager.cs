@@ -6,7 +6,7 @@ namespace DSM.Core.PackageManager
     public class PackageManager
     {
         private static readonly PackageManager _manager = null;
-        public const int packSize = 1024 * 1024 * 5;//5 MBytes
+        public const int PACKSİZE = 1024 * 1024 * 5;//5 MBytes
         private PackageManager()
         {
 
@@ -17,7 +17,7 @@ namespace DSM.Core.PackageManager
             return _manager ?? new PackageManager();
         }
 
-        public IEnumerable<IEnumerable<T>> GetPacks<T>(IEnumerable<T> fullObject, int packageSize = packSize) 
+        public IEnumerable<IEnumerable<T>> GetPacks<T>(IEnumerable<T> fullObject, int packageSize = PACKSİZE) 
         {
             if (fullObject == null)
             {

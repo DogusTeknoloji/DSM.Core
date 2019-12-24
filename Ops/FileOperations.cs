@@ -98,10 +98,13 @@ namespace DSM.Core.Ops
             return svcTimer;
         }
 
-        public static string GetSystemDrive()
+        public static string GetSystemDrive
         {
-            string systemDirectory = Environment.SystemDirectory;
-            return Path.GetPathRoot(systemDirectory);
+            get
+            {
+                string systemDirectory = Environment.SystemDirectory;
+                return Path.GetPathRoot(systemDirectory);
+            }
         }
     }
 }

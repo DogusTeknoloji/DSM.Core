@@ -27,10 +27,7 @@ namespace DSM.Core.Ops.PlatformServices
                             DirectoryEntry entry = (DirectoryEntry)principal.GetUnderlyingObject();
 
                             bool isUserEnabled = IsUserEnabled((int)entry.Properties["userAccountControl"].Value);
-                            if (!isUserEnabled)
-                            {
-                                continue;
-                            }
+                            if (!isUserEnabled) continue;
 
                             ADDomainUser domainUser = new ADDomainUser
                             {
