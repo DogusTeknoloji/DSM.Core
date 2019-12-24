@@ -14,6 +14,9 @@
 ![Nuget](https://img.shields.io/nuget/v/dsm.core?style=flat-square)
 ![Downloads](https://img.shields.io/nuget/dt/dsm.core?label=Downloads&style=flat-square)
 
+###### Code Quality Stats
+[![CodeFactor](https://www.codefactor.io/repository/github/dogusteknoloji/dsm.core/badge)](https://www.codefactor.io/repository/github/dogusteknoloji/dsm.core)
+
 **DSM** is an middleware management and reporting tool designed to be strong and simple. It is build with C#. It can be used to collect IIS Site info,bindings,logs,site backends and more...
 
 The product represents a big suite of middleware management tools that can help you easily watch and manage your services. 
