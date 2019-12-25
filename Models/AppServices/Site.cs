@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DSM.Core.Models
 {
-    public partial class Site : ISite // Table Architecture
+    public class Site : ISite // Table Architecture
     {
         [StringLimit(100)] private string _machineName;
         [StringLimit(250)] private string _name;

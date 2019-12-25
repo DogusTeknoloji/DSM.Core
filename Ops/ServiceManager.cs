@@ -5,7 +5,7 @@ namespace DSM.Core.Ops
 {
     public static class ServiceManager
     {
-        private static bool NewClient(string apiKey)
+        private static void NewClient(string apiKey)
         {
             string machineName = Environment.MachineName;
             Client client = new Client
@@ -16,13 +16,7 @@ namespace DSM.Core.Ops
                 LastOnlineDate = DateTime.Now,
                 Name = machineName
             };
-            dynamic result = WebOperations.WebPost(client, WebOperations.WebMethod.POST_CLIENT, apiKey);
-            if (result > 0)
-            {
-                return true;
-            }
-
-            return false;
+            _ = WebOperations.WebPost(client, WebOperations.WebMethod.POST_CLIENT, apiKey);
         }
 
         public static ServiceTimer GetScheduler(short serviceId, int clientId, string apiKey)

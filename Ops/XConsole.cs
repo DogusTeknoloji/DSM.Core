@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace DSM.Core.Ops
 {
@@ -73,10 +74,10 @@ namespace DSM.Core.Ops
         {
             string classname = GetCallerClassName();
             string methodname = GetCallerMethodName();
-            //if (!_allowedThreadClass.Contains(classname) || !_allowedThreadMethod.Contains(methodname))
-            //{
-            //    return;
-            //}
+            if (!_allowedThreadClass.Contains(classname) || !_allowedThreadMethod.Contains(methodname))
+            {
+                return;
+            }
 
             Swap(classname, colorSet);
             string prefix = _defaultTitle.ContainsKey(classname) ? _defaultTitle[classname] : string.Empty;
@@ -93,10 +94,10 @@ namespace DSM.Core.Ops
         {
             string classname = GetCallerClassName();
             string methodname = GetCallerMethodName();
-            //if (!_allowedThreadClass.Contains(classname) || !_allowedThreadMethod.Contains(methodname))
-            //{
-            //    return;
-            //}
+            if (!_allowedThreadClass.Contains(classname) || !_allowedThreadMethod.Contains(methodname))
+            {
+                return;
+            }
 
             Swap(classname, colorSet);
             string prefix = _defaultTitle.ContainsKey(classname) ? _defaultTitle[classname] : string.Empty;
@@ -146,17 +147,22 @@ namespace DSM.Core.Ops
         public static void WriteEvent(string message, EventType type = EventType.Information)
         {
             string logName = GetCallerClassName();
+            bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            const string SOURCENAME = "DSM.Services";
 
-            //if (!EventLog.SourceExists(sourceName))
-            //{
-            //    EventLog.CreateEventSource(sourceName, logName);
-            //}
+            if (isWindows)
+            {
+                if (!EventLog.SourceExists(SOURCENAME))
+                {
+                    EventLog.CreateEventSource(SOURCENAME, logName);
+                }
 
-            //EventLog log = new EventLog(logName);
-            //log.Source = sourceName;
+                EventLog log = new EventLog(logName);
+                log.Source = SOURCENAME;
 
-            //EventLogEntryType entryType = (EventLogEntryType)type;
-            //log.WriteEntry(message, entryType);
+                EventLogEntryType entryType = (EventLogEntryType)type;
+                log.WriteEntry(message, entryType);
+            }
         }
 
         public static void ResetColor()

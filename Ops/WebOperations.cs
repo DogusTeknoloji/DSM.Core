@@ -15,22 +15,20 @@ namespace DSM.Core.Ops
     {
 
 #if DEBUG
-        //private static string serverUrl = $"http://{Extensions.GetLocalIPAddress()}:90";
-        private static string serverUrl = AppSettingsManager.GetConfiguration()["Host:Url"];
+        private static string _serverUrl = AppSettingsManager.GetConfiguration()["Host:Url"];
 #else 
-        private static string serverUrl = AppSettingsManager.GetConfiguration()["Host:Url"];
+        private static string _serverUrl = AppSettingsManager.GetConfiguration()["Host:Url"];
 #endif
 
-        private static readonly LogManager logManager = LogManager.GetManager("WebOperations");
+        private static readonly LogManager _logManager = LogManager.GetManager("WebOperations");
         public static string AuthenticateAgent(string AgentName, string ServerName)
         {
             try
             {
-                WebRequest request = WebRequest.CreateHttp($"{serverUrl}/Auth/Login/");
+                WebRequest request = WebRequest.CreateHttp($"{_serverUrl}/Auth/Login/");
                 request.Method = "POST";
                 request.ContentType = "application/x-www-form-urlencoded";
 
-                //string requestBody = JsonConvert.SerializeObject(new { Username = ServerName, Password = AgentName });
                 string requestBody = $"Username={ServerName}&Password={AgentName}";
                 byte[] buffer = Encoding.UTF8.GetBytes(requestBody);
                 Stream body = request.GetRequestStream();
@@ -47,7 +45,7 @@ namespace DSM.Core.Ops
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Authentication Fail", ex);
             }
         }
 
@@ -56,7 +54,7 @@ namespace DSM.Core.Ops
             try
             {
                 string requestParameters = string.Join("/", parameters);
-                string requestString = string.Join("/", serverUrl, method);
+                string requestString = string.Join("/", _serverUrl, method);
                 if (requestParameters.Length > 0) requestString = string.Join("/", requestString, requestParameters);
 
 
@@ -87,7 +85,7 @@ namespace DSM.Core.Ops
         {
             try
             {
-                WebRequest request = WebRequest.CreateHttp($"{serverUrl}/{method}/{string.Join("/", parameters)}?NGAuthVKey={apiKey}");
+                WebRequest request = WebRequest.CreateHttp($"{_serverUrl}/{method}/{string.Join("/", parameters)}?NGAuthVKey={apiKey}");
                 request.Method = "GET";
                 request.ContentType = "application/json";
 
@@ -110,19 +108,19 @@ namespace DSM.Core.Ops
             }
         }
 
-        private static bool silencioFlag = true;
+        private static bool _silencioFlag = true;
         public static T WebPost<T>(T bodyItem, string method, string apiKey) where T : class
         {
             try
             {
-                if (!silencioFlag)
+                if (!_silencioFlag)
                 {
                     XConsole.SilentAll(includeMethods: true);
                 }
 
-                silencioFlag = true;
+                _silencioFlag = true;
 
-                WebRequest request = WebRequest.CreateHttp($"{serverUrl}/{method}/?NGAuthVKey={apiKey}");
+                WebRequest request = WebRequest.CreateHttp($"{_serverUrl}/{method}/?NGAuthVKey={apiKey}");
                 request.Method = "POST";
                 request.ContentType = "application/json";
                 string requestBody = JsonConvert.SerializeObject(bodyItem);
@@ -167,8 +165,6 @@ namespace DSM.Core.Ops
         {
             try
             {
-                //XConsole.WriteLine($"TRYING TO CONNECT {uri} DESTINATION BY {port} PORT");
-
                 HttpWebRequest request = WebRequest.CreateHttp(uri.Trim());
                 HttpWebResponse response = request.GetResponse() as HttpWebResponse;
 
@@ -179,7 +175,6 @@ namespace DSM.Core.Ops
 
                 ProcessDNSInformation(response.ResponseUri.Host, ref endpoint);
 
-                //XConsole.WriteLine($"DESTINATION HOST {endpoint.DestinationServer} REPLIED --> {endpoint.ServerResponseDescription}[{endpoint.ServerResponse}] WITH HTTP {endpoint.HttpProtocol} ");
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     return true;
@@ -187,7 +182,6 @@ namespace DSM.Core.Ops
             }
             catch (Exception ex)
             {
-                //XConsole.WriteLine($"EXCEPTION--> {uri}{Environment.NewLine} MSG --> {ex.Message}");
                 endpoint.ServerResponseDescription = ex.Message;
             }
             return false;
@@ -201,21 +195,22 @@ namespace DSM.Core.Ops
             endpoint.DestinationAddressType = address?.AddressFamily.ToString();
             endpoint.DestinationServer = hostInfo.HostName;
         }
-        public static bool CheckSQLDatabaseAccesibility(string connectionString)
+        public static async Task<bool> CheckSQLDatabaseAccesibilityAsync(string connectionString)
         {
             SqlConnection connection = null;
             if (connectionString == null) return false;
             try
             {
                 connection = new SqlConnection(connectionString);
-                var task = Task.Run(() =>
-                {
-                    logManager.Write("Task Running:" + connectionString);
-                    connection.Open();
-                    connection.Close();
-                });
+                var task = Task.Run(new Func<bool>(() =>
+              {
+                  _logManager.Write("Task Running:" + connectionString);
+                  connection.Open();
+                  connection.Close();
+                  return true;
+              }));
 
-                return task.Wait(TimeSpan.FromSeconds(60));
+                return await task;
             }
             catch (Exception)
             {
@@ -226,7 +221,6 @@ namespace DSM.Core.Ops
                 connection.Dispose();
             }
         }
-
 
         public struct WebMethod
         {
@@ -292,10 +286,6 @@ namespace DSM.Core.Ops
             public const string POST_PACKAGE_MULTIPLE = "packageVersion_multiple";
 
             public const string DELETE_AUTH_DESTROY_API = "/";
-        }
-        public struct UIWebMethod
-        {
-
         }
     }
 }

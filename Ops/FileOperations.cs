@@ -58,42 +58,6 @@ namespace DSM.Core.Ops
                     svcTimer.Minute = 0;
                     svcTimer.Second = 40;
                     break;
-                    //case Names.MonitorService:
-                    //    svcTimer.Day = Properties.Settings.Default.SCH_DAY;
-                    //    svcTimer.Hour = Properties.Settings.Default.SCH_HOUR;
-                    //    svcTimer.Minute = Properties.Settings.Default.SCH_MINUTE;
-                    //    svcTimer.Second = Properties.Settings.Default.SCH_SECOND;
-                    //    break;
-                    //case Names.EndpointTracker:
-                    //    svcTimer.Day = Properties.Settings.Default.EPTSCH_DAY;
-                    //    svcTimer.Hour = Properties.Settings.Default.EPTSCH_HOUR;
-                    //    svcTimer.Minute = Properties.Settings.Default.EPTSCH_MINUTE;
-                    //    svcTimer.Second = Properties.Settings.Default.EPTSCH_SECOND;
-                    //    break;
-                    //case Names.CSTTracker:
-                    //    svcTimer.Day = Properties.Settings.Default.EPTSCH_DAY;
-                    //    svcTimer.Hour = Properties.Settings.Default.EPTSCH_HOUR;
-                    //    svcTimer.Minute = Properties.Settings.Default.EPTSCH_MINUTE;
-                    //    svcTimer.Second = Properties.Settings.Default.EPTSCH_SECOND;
-                    //    break;
-                    //case Names.NancyGateway:
-                    //    svcTimer.Day = Properties.Settings.Default.NGW_DAY;
-                    //    svcTimer.Hour = Properties.Settings.Default.NGW_HOUR;
-                    //    svcTimer.Minute = Properties.Settings.Default.NGW_MINUTE;
-                    //    svcTimer.Second = Properties.Settings.Default.NGW_SECOND;
-                    //    break;
-                    //case Names.PostOffice:
-                    //    svcTimer.Day = Properties.Settings.Default.MQH_DAY;
-                    //    svcTimer.Hour = Properties.Settings.Default.MQH_HOUR;
-                    //    svcTimer.Minute = Properties.Settings.Default.MQH_MINUTE;
-                    //    svcTimer.Second = Properties.Settings.Default.MQH_SECOND;
-                    //    break;
-                    //case Names.WebConfBackup:
-                    //    svcTimer.Day = Properties.Settings.Default.WCFGBCK_DAY;
-                    //    svcTimer.Hour = Properties.Settings.Default.WCFGBCK_HOUR;
-                    //    svcTimer.Minute = Properties.Settings.Default.WCFGBCK_MINUTE;
-                    //    svcTimer.Second = Properties.Settings.Default.WCFGBCK_SECOND;
-                    //    break;
             }
             return svcTimer;
         }

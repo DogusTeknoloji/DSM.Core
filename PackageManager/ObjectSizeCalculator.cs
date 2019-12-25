@@ -46,7 +46,7 @@ namespace DSM.Core.PackageManager
             }
             else if (type == typeof(DateTime))
             {
-                return 4;// + 2;
+                return 4;
             }
             else
             {
@@ -62,7 +62,6 @@ namespace DSM.Core.PackageManager
             }
 
             IEnumerable<object> ienr = enumerable.Cast<object>();
-            Type elementType = enumerable.GetType().GetElementType();
             long elementSize = ienr.FirstOrDefault().SizeOf();
 
             long totalSize = elementSize * ienr.Count();
@@ -79,7 +78,7 @@ namespace DSM.Core.PackageManager
             int charSize = Marshal.SizeOf<char>();
             int length = attribute.MaxLength;
 
-            long totalSize = charSize * length;//+ 16 + 4 + 1;
+            long totalSize = charSize * length;
             return totalSize;
         }
     }
