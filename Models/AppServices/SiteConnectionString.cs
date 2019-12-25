@@ -24,22 +24,22 @@ namespace DSM.Core.Models
         public long SiteId { get; set; }
 
         [Column("RawConnectionString", Order = 3)]
-        public string RawConnectionString { get => _rawConnectionString; set => _rawConnectionString = value.Limit(512); }
+        public string RawConnectionString { get => _rawConnectionString; set => _rawConnectionString = value?.Limit(512); }
 
         [Column("ServerName", Order = 4)]
-        public string ServerName { get => _serverName; set => _serverName = value.Limit(200); }
+        public string ServerName { get => _serverName; set => _serverName = value?.Limit(200); }
 
         [Column("Port", Order = 5)]
         public int Port { get; set; }
 
         [Column("DatabaseName", Order = 6)]
-        public string DatabaseName { get => _databaseName; set => _databaseName = value.Limit(200); }
+        public string DatabaseName { get => _databaseName; set => _databaseName = value?.Limit(200); }
 
         [Column("UserName", Order = 7)]
-        public string UserName { get => _userName; set => _userName = value.Limit(200); }
+        public string UserName { get => _userName; set => _userName = value?.Limit(200); }
 
         [Column("Password", Order = 8)]
-        public string Password { get => _password; set => _password = value.Limit(200); }
+        public string Password { get => _password; set => _password = value?.Limit(200); }
 
         [Column("IsAvailable", Order = 9)]
         public bool IsAvailable { get; set; }
@@ -60,7 +60,7 @@ namespace DSM.Core.Models
         public virtual Site Site { get; set; }
 
         [Column("ConnectionName", Order = 14)]
-        public string ConnectionName { get => _connectionName; set => _connectionName = value.Limit(256); }
+        public string ConnectionName { get => _connectionName; set => _connectionName = value?.Limit(256); }
 
         public object Clone()
         {

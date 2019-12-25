@@ -15,11 +15,11 @@ namespace DSM.Core.Models.LogServices
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         public long SiteId { get; set; }
-        public string FilePath { get => filePath; set => filePath = value.Limit(0); }
+        public string FilePath { get => filePath; set => filePath = value?.Limit(0); }
         public long CursorPointer { get; set; }
         public long FileSize { get; set; }
         public long Transfered { get; set; }
         public DateTime LastPackage { get; set; }
-        public string States { get => states; set => states = value.Limit(0); }
+        public string States { get => states; set => states = value?.Limit(0); }
     }
 }

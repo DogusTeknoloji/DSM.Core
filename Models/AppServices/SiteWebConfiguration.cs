@@ -11,7 +11,7 @@ namespace DSM.Core.Models
         public long SiteId { get; set; }
 
         [Column("ContentRaw", Order = 2)]
-        public string ContentRaw { get => _contentRaw; set => _contentRaw = value.Limit(64000); }
+        public string ContentRaw { get => _contentRaw; set => _contentRaw = value?.Limit(64000); }
 
         public virtual Site Site { get; set; }
     }

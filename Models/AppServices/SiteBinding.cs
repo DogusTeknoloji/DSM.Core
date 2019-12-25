@@ -19,7 +19,7 @@ namespace DSM.Core.Models
         public int Id { get; set; }
 
         [Column("Host", Order = 2)]
-        public string Host { get => _host; set => _host = value.Limit(150); }
+        public string Host { get => _host; set => _host = value?.Limit(150); }
 
         [Column("SiteId", Order = 3)]
         public long SiteId { get; set; }
@@ -31,16 +31,16 @@ namespace DSM.Core.Models
         public bool IsSSLBound { get; set; }
 
         [Column("IpAddress", Order = 5)]
-        public string IpAddress { get => _ipAddress; set => _ipAddress = value.Limit(64); }
+        public string IpAddress { get => _ipAddress; set => _ipAddress = value?.Limit(64); }
 
         [Column("IpAdressFamily", Order = 6)]
-        public string IpAddressFamily { get => _ipAddressFamily; set => _ipAddressFamily = value.Limit(15); }
+        public string IpAddressFamily { get => _ipAddressFamily; set => _ipAddressFamily = value?.Limit(15); }
 
         [Column("Port", Order = 7)]
-        public string Port { get => _port; set => _port = value.Limit(10); }
+        public string Port { get => _port; set => _port = value?.Limit(10); }
 
         [Column("Protocol", Order = 8)]
-        public string Protocol { get => _protocol; set => _protocol = value.Limit(40); }
+        public string Protocol { get => _protocol; set => _protocol = value?.Limit(40); }
 
     }
 }

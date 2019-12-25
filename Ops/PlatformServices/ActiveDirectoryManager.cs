@@ -7,7 +7,7 @@ using System.DirectoryServices.AccountManagement;
 
 namespace DSM.Core.Ops.PlatformServices
 {
-    public class ActiveDirectoryManager
+    public static class ActiveDirectoryManager
     {
 
         public static List<ADDomainUser> GetDomainUsers(string apiKey)
@@ -67,8 +67,6 @@ namespace DSM.Core.Ops.PlatformServices
                     XConsole.WriteLine($"An exception occured context switch failed=> {domain.DomainName}, {ex.Message}", ConsoleColorSetBlueW.Instance);
                     string key = "abort".ToLower();
                     XConsole.WriteLine($"Please type \"{key}\" to quit, or press Enter to continue");
-                    //string msg = XConsole.ReadLine();
-                    //if (msg.ToLower() == key) Environment.Exit(-1);
                 }
             }
             XConsole.WriteLine("Operation Done");

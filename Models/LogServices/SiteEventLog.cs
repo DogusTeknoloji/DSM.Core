@@ -16,8 +16,8 @@ namespace DSM.Core.Models.LogServices
         public long Id { get; set; }
         public long SiteId { get; set; }
         public DateTime TimeStamp { get; set; }
-        public string Description { get => description; set => description = value.Limit(256); }
-        public string Solution { get => solution; set => solution = value.Limit(256); }
+        public string Description { get => description; set => description = value?.Limit(256); }
+        public string Solution { get => solution; set => solution = value?.Limit(256); }
         public bool ErrorIndicatior { get; set; }
     }
 }

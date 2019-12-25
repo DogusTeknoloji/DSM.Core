@@ -25,7 +25,6 @@ namespace DSM.Core.PackageManager
             }
 
             long sizeOfObject = fullObject.First().SizeOf();
-            int objectCount = fullObject.Count();
             int packLength = (int)(packageSize / sizeOfObject);
 
             IEnumerable<IEnumerable<T>> packs = fullObject.Where((x, i) => i % packLength == 0)
