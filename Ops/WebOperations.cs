@@ -210,7 +210,7 @@ namespace DSM.Core.Ops
                   return true;
               }));
 
-                return await task;
+                return await task.ConfigureAwait(false);
             }
             catch (Exception)
             {
