@@ -12,6 +12,6 @@ namespace DSM.Core.Models.LogServices
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Name { get => name; set => name = value.Limit(5); }
+        public string Name { get => name; set => name = value?.Limit(5); }
     }
 }

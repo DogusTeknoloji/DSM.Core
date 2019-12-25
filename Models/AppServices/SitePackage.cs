@@ -20,9 +20,9 @@ namespace DSM.Core.Models
         public virtual Site Site { get; set; }
 
         [Column("Name", Order = 3)]
-        public string Name { get => _name; set => _name = value.Limit(100); }
+        public string Name { get => _name; set => _name = value?.Limit(100); }
 
         [Column("NewVersion", Order = 4)]
-        public string Version { get => _version; set => _version = value.Limit(50); }
+        public string Version { get => _version; set => _version = value?.Limit(50); }
     }
 }
