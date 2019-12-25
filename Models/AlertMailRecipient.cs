@@ -13,8 +13,8 @@ namespace DSM.Core.Models
         [Required]
         public bool IsDirectRecipient { get; set; } = true;
         [Required]
-        public bool IsCCRecipient { get; set; } = false;
+        public bool IsCCRecipient { get; set; }
         [Required]
-        public bool IsBCCRecipient { get; set; } = false;
+        public bool IsBCCRecipient { get; set; }
     }
 }

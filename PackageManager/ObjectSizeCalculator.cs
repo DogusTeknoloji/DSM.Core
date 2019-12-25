@@ -48,7 +48,10 @@ namespace DSM.Core.PackageManager
             {
                 return 4;// + 2;
             }
-            return 0;
+            else
+            {
+                return 0;
+            }
         }
 
         public static long SizeOf(this IEnumerable enumerable)
